@@ -12,6 +12,7 @@ Elias Lind
   - [Docker Compose](#docker-compose)
       - [Services](#services)
       - [Image](#image)
+      - [Ports](#ports)
 
 
 ---
@@ -52,4 +53,10 @@ Bases the services on an image - creating containers within the services, within
 >> website:
 >>> image: nginx:latest
 
-
+#### Ports
+Defines which ports the service will use. 
+> Services:
+>> website:
+>>> image: nginx:latest
+>>> ports: 
+>>>> -- "8080:80"
