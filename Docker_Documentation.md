@@ -18,7 +18,7 @@ Elias Lind
 ---
 
 ## List of common syntax
-This is to be used with Powershell.
+This is to be used with Powershell, Visual Studio Code & Docker Desktop. 
 
 ---
 
@@ -59,4 +59,4 @@ Defines which ports the service will use.
 >> website:
 >>> image: nginx:latest
 >>> ports: 
->>>> -- "8080:80"
+>>>> - "8080:80"
