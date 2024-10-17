@@ -5,6 +5,7 @@ Elias Lind
 
 ## Table of contents
 - [Docker Documentation](#docker-documentation)
+  - [Table of contents](#table-of-contents)
   - [List of common syntax](#list-of-common-syntax)
       - [Start Docker](#start-docker)
       - [**Run Docker Container**](#run-docker-container)
@@ -24,3 +25,9 @@ This is to be used with Powershell.
 #### **Run Docker Container**
 > A common command for creating a container. 
 ***Docker run -d -t [image name]***
+
+Docker containers
+
+
+Docker exec -it
+
