@@ -13,6 +13,7 @@ Elias Lind
       - [Services](#services)
       - [Image](#image)
       - [Ports](#ports)
+      - [Restart](#restart)
 
 
 ---
@@ -60,3 +61,12 @@ Defines which ports the service will use.
 >>> image: nginx:latest
 >>> ports: 
 >>>> - "8080:80"
+
+#### Restart
+> Services:
+>> website:
+>>> image:  nginx:latest
+>>> ports:
+>>>> - "8081:80"
+>>>restart: always
+
