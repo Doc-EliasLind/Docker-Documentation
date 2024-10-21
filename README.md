@@ -1,6 +1,10 @@
 # README
 
+---
+
 ## Docker Documentation
+
+--- 
 
 ### Purpose of this GitHub Page
 
