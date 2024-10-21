@@ -13,7 +13,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
 
   juice-shop:
-    image: bkiminich/juice-shop
+    image: bkimminich/juice-shop
     ports:
       - "3000:3000"
     networks:
