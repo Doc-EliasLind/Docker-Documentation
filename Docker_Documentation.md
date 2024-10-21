@@ -63,6 +63,8 @@ Defines which ports the service will use.
 >>>> - "8080:80"
 
 #### Restart
+Specifies whether or not the service can restart after composing services. 
+
 > Services:
 >> website:
 >>> image:  nginx:latest
