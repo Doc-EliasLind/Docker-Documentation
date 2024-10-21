@@ -1,6 +1,48 @@
+version: '3.8'
+
 services:
-  website:
-    image: nginx
+  dvwa:
+    image: vulnerables/web-dvwa
+    ports: 
+      - "8080:80"
+    networks:
+      - hacklab
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password 
+      - MYSQL_ROOT_PASSWORD=password
+
+  juice-shop:
+    image: bkiminich/juice-shop
     ports:
+      - "3000:3000"
+    networks:
+      - hacklab
+  
+  metasploitable:
+    image: tleemcjr/metasploitable2
+    ports:
+      - "2222:22"
       - "8081:80"
-    restart: always
+      - "3307:3306"
+    networks:
+      - hacklab
+
+  kali:
+    image: kalilinux/kali-rolling
+    stdin_open: true
+    tty: true
+    networks:
+      - hacklab
+    command: /bin/bash
+  
+  metasploit:
+    image: metasploitframework/metasploit-framework
+    stdin_open: true
+    tty: true
+    networks:
+      - hacklab
+
+networks:
+  hacklab:
+    driver: bridge
