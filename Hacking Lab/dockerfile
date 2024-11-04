@@ -1,1 +1,62 @@
 FROM kalilinux/kali-rolling
+
+# Update and upgrade base system, install essential utilities
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends \
+    sudo \
+    curl \
+    wget \
+    git \
+    vim \
+    nano \
+    unzip \
+    net-tools \
+    iputils-ping \
+    dnsutils \
+    lsof \
+    procps \
+    tmux \
+    python3 \
+    python3-pip \
+    man-db && \
+    # Clean up
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install core pentesting tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nmap \
+    netcat \
+    sqlmap \
+    hydra \
+    nikto \
+    metasploit-framework \
+    john \
+    hashcat \
+    aircrack-ng \
+    wireshark \
+    tcpdump \
+    burpsuite \
+    gobuster \
+    dirb \
+    ftp \
+    ssh \
+    openssl && \
+    # Clean up
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install VNC and minimal GUI environment
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    xfce4 \
+    xfce4-terminal \
+    tightvncserver && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Create a startup script for updating packages
+RUN echo '#!/bin/bash\napt-get update && apt-get upgrade -y\nexec "$@"' > /usr/local/bin/startup.sh && \
+    chmod +x /usr/local/bin/startup.sh
+
+# Set entrypoint to startup script
+ENTRYPOINT ["/usr/local/bin/startup.sh"]
+
+# Optional: Add VNC start command for convenience
+CMD ["tightvncserver", ":1"]
