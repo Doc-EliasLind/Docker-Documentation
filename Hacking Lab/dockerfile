@@ -1,58 +1,49 @@
 FROM kalilinux/kali-rolling
 
-# Update and upgrade base system, install essential utilities
+# Set noninteractive environment to skip configuration prompts and set user for tightvncserver
+ENV DEBIAN_FRONTEND=noninteractive
+ENV USER=root
+
+# Update system, install essential utilities, pentesting tools, VNC, and minimal GUI environment
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
-    sudo \
-    curl \
-    wget \
-    git \
-    vim \
-    nano \
-    unzip \
-    net-tools \
-    iputils-ping \
-    dnsutils \
-    lsof \
-    procps \
-    tmux \
-    python3 \
-    python3-pip \
-    man-db && \
-    # Clean up
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Set noninteractive environment to skip configuration prompts
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install core pentesting tools with specific dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    nmap \
-    netcat-openbsd \
-    sqlmap \
-    hydra \
-    nikto \
-    metasploit-framework \
-    john \
-    hashcat \
-    aircrack-ng \
-    wireshark \
-    tcpdump \
-    burpsuite \
-    gobuster \
-    dirb \
-    ftp \
-    ssh \
-    openssl \
-    openjdk-11-jre && \
-    # Clean up
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install VNC and minimal GUI environment
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    xfce4 \
-    xfce4-terminal \
-    tightvncserver && \
+        sudo \
+        curl \
+        wget \
+        git \
+        vim \
+        nano \
+        unzip \
+        net-tools \
+        iputils-ping \
+        dnsutils \
+        lsof \
+        procps \
+        tmux \
+        python3 \
+        python3-pip \
+        man-db \
+        nmap \
+        netcat-openbsd \
+        sqlmap \
+        hydra \
+        nikto \
+        metasploit-framework \
+        john \
+        hashcat \
+        aircrack-ng \
+        wireshark \
+        tcpdump \
+        burpsuite \
+        gobuster \
+        dirb \
+        ftp \
+        ssh \
+        openssl \
+        openjdk-11-jre \
+        xfce4 \
+        xfce4-terminal \
+        tightvncserver && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Create a startup script for updating packages
