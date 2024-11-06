@@ -22,10 +22,13 @@ RUN apt-get update && apt-get upgrade -y && \
     # Clean up
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install core pentesting tools
+# Set noninteractive environment to skip configuration prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install core pentesting tools with specific dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nmap \
-    netcat \
+    netcat-openbsd \
     sqlmap \
     hydra \
     nikto \
@@ -40,7 +43,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     dirb \
     ftp \
     ssh \
-    openssl && \
+    openssl \
+    openjdk-11-jre && \
     # Clean up
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
