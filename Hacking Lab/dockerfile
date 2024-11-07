@@ -1,10 +1,10 @@
 FROM kalilinux/kali-rolling
 
-# Set noninteractive environment to skip configuration prompts and set user for tightvncserver
+# Set noninteractive environment and user
 ENV DEBIAN_FRONTEND=noninteractive
 ENV USER=root
 
-# Update system, install essential utilities, pentesting tools, VNC, and minimal GUI environment
+# Update, upgrade, install utilities, core pentesting tools, and minimal GUI in one RUN command
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         sudo \
@@ -42,8 +42,8 @@ RUN apt-get update && apt-get upgrade -y && \
         openssl \
         openjdk-11-jre \
         xfce4 \
-        xfce4-terminal \
-        tightvncserver && \
+        xfce4-terminal && \
+    # Clean up to reduce image size
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Create a startup script for updating packages
@@ -53,5 +53,5 @@ RUN echo '#!/bin/bash\napt-get update && apt-get upgrade -y\nexec "$@"' > /usr/l
 # Set entrypoint to startup script
 ENTRYPOINT ["/usr/local/bin/startup.sh"]
 
-# Optional: Add VNC start command for convenience
-CMD ["tightvncserver", ":1"]
+# Optional: Add a default command
+CMD ["/bin/bash"]
