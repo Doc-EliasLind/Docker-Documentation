@@ -1,0 +1,30 @@
+services:
+  selenium-chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    shm_size: 2g
+    environment:
+      - SE_NODE_MAX_INSTANCES=2
+      - SE_NODE_MAX_SESSION=2
+      - VNC_PASSWORD=gutesset
+    networks:
+      - secure-network
+    restart: unless-stopped
+  
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "443:443"
+    networks:
+      - secure-network
+    depends_on:
+      - selenium-chrome
+
+networks:
+  secure-network:
+    driver: bridge
+
